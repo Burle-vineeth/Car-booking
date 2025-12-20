@@ -1,0 +1,17 @@
+.header {
+  border-color: var(--border);
+
+  .car-booking {
+    color: var(--text-primary)
+  }
+
+  .nav-link {
+    color: var(--text-secondary)
+  }
+
+  .login-btn {
+    background-color: var(--primary);
+    color: white;
+    box-shadow: var(--shadow)
+  }
+}
