@@ -1,0 +1,103 @@
+<header
+  class="sticky top-0 z-50 w-full border-b bg-(--bg-surface) backdrop-blur-md transition-colors"
+  style="border-color: var(--border)"
+>
+  <div class="mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
+    <!-- Left: Logo -->
+    <div class="flex items-center gap-2 cursor-pointer" routerLink="">
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb5D8cf_N0CXieR7mye4vLs8V7QMrbyGZpIA&s"
+        alt="Car Booking Logo"
+        class="h-8 w-auto"
+      />
+
+      <span class="text-lg font-semibold tracking-tight" style="color: var(--text-primary)">
+        Car Booking
+      </span>
+    </div>
+
+    <div class="flex gap-3">
+      <!-- Center: Navigation -->
+      <nav class="hidden items-center gap-8 md:flex">
+        <a
+          routerLink="/"
+          routerLinkActive="text-[var(--primary)]"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="relative text-sm font-medium transition"
+          style="color: var(--text-secondary)"
+        >
+          Home
+          <span
+            class="absolute -bottom-1 left-0 h-0.5 w-full scale-x-0 bg-(--primary) transition-transform duration-300 group-hover:scale-x-100"
+          ></span>
+        </a>
+
+        <a
+          routerLinkActive="text-[var(--primary)]"
+          class="text-sm font-medium transition"
+          style="color: var(--text-secondary)"
+        >
+          Book a Ride
+        </a>
+
+        <a
+          routerLinkActive="text-[var(--primary)]"
+          class="text-sm font-medium transition"
+          style="color: var(--text-secondary)"
+        >
+          My Rides
+        </a>
+      </nav>
+
+      <!-- Right: Actions -->
+      <div class="flex items-center gap-3">
+        <button
+          type="button"
+          class="inline-flex items-center justify-center rounded-lg p-2 text-lg transition-colors duration-200 cursor-pointer"
+          (click)="toggleTheme()"
+          aria-label="Toggle theme"
+        >
+          @if (isDarkMode()) {
+            <span class="text-2xl"> ☀️ </span>
+          } @else {
+            <fa-icon [icon]="faMoon" class="text-gray-800 h-6 w-6 rotate-245"></fa-icon>
+          }
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button
+          type="button"
+          class="inline-flex items-center justify-center rounded-lg transition md:hidden cursor-pointer"
+          style="color: var(--text-secondary)"
+          aria-label="Open menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+
+        <!-- Login Button -->
+        <a
+          [routerLink]="['/' + uiRoutes.LOGIN]"
+          class="rounded-md px-4 py-2 text-sm font-semibold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-offset-2"
+          style="background-color: var(--primary); color: white; box-shadow: var(--shadow)"
+          onmouseover="this.style.backgroundColor = 'var(--primary-hover)'"
+          onmouseout="this.style.backgroundColor = 'var(--primary)'"
+        >
+          Login
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,3 +1,97 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss';
 
-@import "tailwindcss";
+:root {
+  /* ---------- Typography ---------- */
+  --font-sans:
+    'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+
+  /* ---------- Backgrounds ---------- */
+  --bg: #f4f6f9;
+  /* App background */
+  --bg-surface: #ffffff;
+  /* Cards, header */
+  --bg-elevated: #eef1f6;
+  /* Modals, dropdowns */
+
+  /* ---------- Text ---------- */
+  --text-primary: #0f172a;
+  /* Headings */
+  --text-secondary: #1e293b;
+  /* Body */
+  --text-muted: #64748b;
+  /* Meta text */
+
+  /* ---------- Borders ---------- */
+  --border: #e2e8f0;
+
+  /* ---------- Brand (Primary CTA) ---------- */
+  --primary: #0f2a44;
+  /* Automotive navy */
+  --primary-hover: #0b1f33;
+  --primary-active: #081726;
+  --primary-soft: #e6edf5;
+
+  /* ---------- Accent (Speed / Action) ---------- */
+  --accent: #06b6d4;
+  /* Electric cyan */
+  --accent-hover: #0891b2;
+  --accent-soft: #cffafe;
+
+  /* ---------- Status ---------- */
+  --success: #16a34a;
+  /* Booking confirmed */
+  --warning: #f59e0b;
+  /* Surge / caution */
+  --error: #dc2626;
+  /* Errors */
+  --info: #0284c7;
+  /* Info / tips */
+
+  /* ---------- UI ---------- */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.08);
+  --shadow: 0 14px 32px rgba(15, 23, 42, 0.12);
+  --radius: 14px;
+}
+
+[data-theme='dark'] {
+  /* ---------- Backgrounds ---------- */
+  --bg: #0b0f14;
+  /* Asphalt black */
+  --bg-surface: #111827;
+  /* Cards */
+  --bg-elevated: #0f172a;
+  /* Modals */
+
+  /* ---------- Text ---------- */
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  /* ---------- Borders ---------- */
+  --border: #1f2937;
+
+  /* ---------- Brand ---------- */
+  --primary: #3b82f6;
+  /* Neon blue */
+  --primary-hover: #2563eb;
+  --primary-active: #1d4ed8;
+  --primary-soft: #1e293b;
+
+  /* ---------- Accent ---------- */
+  --accent: #22d3ee;
+  /* Electric cyan glow */
+  --accent-hover: #06b6d4;
+  --accent-soft: #083344;
+
+  /* ---------- Status ---------- */
+  --success: #22c55e;
+  --warning: #fbbf24;
+  --error: #ef4444;
+  --info: #38bdf8;
+
+  /* ---------- UI ---------- */
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.5);
+  --shadow: 0 18px 42px rgba(0, 0, 0, 0.75);
+  --radius: 14px;
+}
