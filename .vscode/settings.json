@@ -19,5 +19,9 @@
 
   // Debug Prettier
   "prettier.enableDebugLogs": true,
-  "cSpell.words": ["geoapify"]
+  "cSpell.words": ["geoapify"],
+
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  }
 }

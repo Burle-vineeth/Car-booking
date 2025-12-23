@@ -7,12 +7,20 @@
     <input
       type="text"
       [placeholder]="placeholder()"
-      class="w-full pl-10 pr-3 py-2 rounded-lg border text-(--text-primary)"
+      class="w-full pl-10 pr-10 py-2 rounded-lg border text-(--text-primary)"
       [ngModel]="value()"
       (ngModelChange)="onUserInput($event)"
       (focus)="onFocus()"
       (blur)="onBlur()"
     />
+
+    @if (loading()) {
+      <span class="absolute right-3 top-1/2 -translate-y-1/2">
+        <span
+          class="w-4 h-4 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin block"
+        ></span>
+      </span>
+    }
   </div>
 
   @if (dropdownOpen() && suggestions().length) {

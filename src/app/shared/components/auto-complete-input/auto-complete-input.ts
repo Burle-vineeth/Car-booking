@@ -1,19 +1,8 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  signal,
-  effect,
-  inject,
-  HostListener,
-  input,
-  output,
-} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { GeoapifyService } from '@/core/services/geoapify.service';
 import { GeoPlace } from '@/core/types';
+import { CommonModule } from '@angular/common';
+import { Component, effect, HostListener, inject, input, output, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-auto-complete-input',
@@ -22,16 +11,17 @@ import { GeoPlace } from '@/core/types';
   templateUrl: './auto-complete-input.html',
 })
 export class AutoCompleteInput {
+  public value = signal('');
+  public suggestions = signal<GeoPlace[]>([]);
+  public dropdownOpen = signal(false);
+  public loading = signal(false);
+
   public icon = input('📍');
   public minLength = input(2);
   public placeholder = input('');
 
   public select = output<GeoPlace>();
   public valueChange = output<string>();
-
-  public value = signal('');
-  public suggestions = signal<GeoPlace[]>([]);
-  public dropdownOpen = signal(false);
 
   /** Tracks who changed the value */
   private changeSource = signal<'user' | 'selection'>('user');
@@ -55,11 +45,16 @@ export class AutoCompleteInput {
 
     this.debounce = setTimeout(async () => {
       try {
+        this.loading.set(true);
+
         const res = await this.geoapify.getAutoCompletePlaces(text);
         this.suggestions.set(res);
         this.dropdownOpen.set(res.length > 0);
-      } catch (error) {}
-    }, 800);
+      } catch (error) {
+      } finally {
+        this.loading.set(false);
+      }
+    }, 500);
   });
 
   @HostListener('document:pointerdown', ['$event'])

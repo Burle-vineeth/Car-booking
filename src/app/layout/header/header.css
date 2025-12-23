@@ -2,16 +2,16 @@
   border-color: var(--border);
 
   .car-booking {
-    color: var(--text-primary)
+    color: var(--text-primary);
   }
 
   .nav-link {
-    color: var(--text-secondary)
+    color: var(--text-secondary);
   }
 
   .login-btn {
     background-color: var(--primary);
     color: white;
-    box-shadow: var(--shadow)
+    box-shadow: var(--shadow);
   }
 }

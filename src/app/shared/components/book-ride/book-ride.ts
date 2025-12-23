@@ -1,8 +1,8 @@
-import { Component, signal, effect, inject, OnDestroy } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { AutoCompleteInput } from '../auto-complete-input/auto-complete-input';
 import { GeoPlace } from '@/core/types';
+import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { AutoCompleteInput } from '../auto-complete-input/auto-complete-input';
 
 @Component({
   selector: 'app-book-ride',

@@ -1,8 +1,8 @@
-import { inject, Injectable } from '@angular/core';
-import { ApiService } from './api.service';
 import { GeoapifyRoutes } from '@/shared/constants';
+import { inject, Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { GeoPlace } from '../types';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root',
