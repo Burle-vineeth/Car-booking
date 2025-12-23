@@ -1,0 +1,30 @@
+<div class="relative autocomplete-wrapper w-full">
+  <div class="relative">
+    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-lg">
+      {{ icon() }}
+    </span>
+
+    <input
+      type="text"
+      [placeholder]="placeholder()"
+      class="w-full pl-10 pr-3 py-2 rounded-lg border text-(--text-primary)"
+      [ngModel]="value()"
+      (ngModelChange)="onUserInput($event)"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+    />
+  </div>
+
+  @if (dropdownOpen() && suggestions().length) {
+    <ul class="absolute z-10 w-full mt-1 border rounded-lg bg-white">
+      @for (place of suggestions(); track place.formatted) {
+        <li
+          class="px-4 py-2 cursor-pointer hover:bg-gray-100"
+          (pointerdown)="selectSuggestion(place)"
+        >
+          {{ place.formatted }}
+        </li>
+      }
+    </ul>
+  }
+</div>

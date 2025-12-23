@@ -11,36 +11,27 @@
     <h2 class="text-2xl font-bold text-(--text-primary) mb-1">Book Your Ride</h2>
     <p class="text-sm text-(--text-muted) mb-6">Fast • Safe • Reliable</p>
 
-    <!-- Pickup -->
     <div class="mb-4">
-      <label class="block text-sm font-semibold text-(--text-secondary) mb-1">
-        Pickup Location
-      </label>
-      <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-(--text-muted) text-lg">📍</span>
-        <input
-          type="text"
-          placeholder="Enter pickup location"
-          class="w-full pl-10 pr-3 py-2 rounded-lg border border-(--border) bg-(--bg) text-(--text-primary) placeholder-(--text-muted) focus:outline-none focus:border-(--primary)"
-          [(ngModel)]="pickup"
-        />
-      </div>
+      <label class="block text-sm font-semibold text-(--text-secondary) mb-1"
+        >Pickup Location</label
+      >
+      <app-auto-complete-input
+        [placeholder]="'Enter pickup location'"
+        [icon]="'📍'"
+        (valueChange)="pickup.set($event)"
+        (select)="onPickupSelect($event)"
+      ></app-auto-complete-input>
     </div>
 
-    <!-- Drop -->
     <div class="mb-6">
-      <label class="block text-sm font-semibold text-(--text-secondary) mb-1">
-        Drop Location
-      </label>
-      <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-(--text-muted) text-lg">🏁</span>
-        <input
-          type="text"
-          placeholder="Enter drop location"
-          class="w-full pl-10 pr-3 py-2 rounded-lg border border-(--border) bg-(--bg) text-(--text-primary) placeholder-(--text-muted) focus:outline-none focus:border-(--primary)"
-          [(ngModel)]="drop"
-        />
-      </div>
+      <label class="block text-sm font-semibold text-(--text-secondary) mb-1">Drop Location</label>
+      <app-auto-complete-input
+        [placeholder]="'Enter drop location'"
+        [icon]="'🏁'"
+        [minLength]="3"
+        (valueChange)="drop.set($event)"
+        (select)="onDropSelect($event)"
+      ></app-auto-complete-input>
     </div>
 
     <button
