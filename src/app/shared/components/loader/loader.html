@@ -1,0 +1,27 @@
+@if (loader$ | async; as loader) {
+  @if (loader.show) {
+    <div class="loader-backdrop">
+      @if (loader.text) {
+        <!-- Detailed Loader -->
+        <div class="loader-card">
+          <div class="car-loader w-full">
+            <span class="road"></span>
+
+            <img
+              class="car h-full"
+              src="https://twemoji.maxcdn.com/v/latest/72x72/1f697.png"
+              alt="car"
+            />
+          </div>
+
+          <p class="loader-text">
+            {{ loader.text }}
+          </p>
+        </div>
+      } @else {
+        <!-- Minimal Spinner -->
+        <div class="spinner"></div>
+      }
+    </div>
+  }
+}
