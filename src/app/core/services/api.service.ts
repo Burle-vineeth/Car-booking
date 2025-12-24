@@ -8,10 +8,10 @@ import { environment } from '@env/environment';
 export class ApiService {
   private http = inject(HttpClient);
 
-  public geoapifyGet(path: string, text: string) {
+  public geoapifyGet(path: string, paramsPayload: Record<string, string>) {
     return this.http.get(`${environment.GEOAPIFY_BASE_URL}/${path}`, {
       params: {
-        text,
+        ...paramsPayload,
         apiKey: environment.GEOAPIFY_API_KEY,
       },
     });

@@ -22,6 +22,12 @@
         (valueChange)="pickup.set($event)"
         (select)="onPickupSelect($event)"
       ></app-auto-complete-input>
+
+      @if (pickupError()) {
+        <p class="mt-1 text-sm text-(--error)">
+          {{ pickupError() }}
+        </p>
+      }
     </div>
 
     <div class="mb-6">
@@ -33,6 +39,12 @@
         (valueChange)="drop.set($event)"
         (select)="onDropSelect($event)"
       ></app-auto-complete-input>
+
+      @if (dropError()) {
+        <p class="mt-1 text-sm text-(--error)">
+          {{ dropError() }}
+        </p>
+      }
     </div>
 
     <button

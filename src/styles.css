@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+body {
+  background-color: var(--bg-surface);
+}
+
 :root {
   /* ---------- Typography ---------- */
   --font-sans:
