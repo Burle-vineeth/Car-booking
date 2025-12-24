@@ -22,6 +22,6 @@
   "cSpell.words": ["geoapify"],
 
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true
+    "source.organizeImports": "explicit"
   }
 }
