@@ -1,10 +1,11 @@
 import { GeoapifyService } from '@/core/services/geoapify.service';
+import { LoaderService } from '@/core/services/loader.service';
 import { GeoPlace, Route } from '@/core/types';
 import { Button } from '@/shared/components/button/button';
 import { Divider } from '@/shared/directives/divider';
 import { CurrencyPipe } from '@angular/common';
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faLocationDot, faMapPin } from '@fortawesome/free-solid-svg-icons';
 
@@ -34,9 +35,16 @@ export class RideSummary implements OnInit {
 
   private route = inject(ActivatedRoute);
   private geoapifyService = inject(GeoapifyService);
+  private loaderService = inject(LoaderService);
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(async (params) => {
+    this.route.queryParams.subscribe((params) => {
+      this.getRideSummary(params);
+    });
+  }
+
+  private async getRideSummary(params: Params) {
+    try {
       if (params['pickup']) {
         this.pickup.set(JSON.parse(params['pickup']));
       }
@@ -46,6 +54,7 @@ export class RideSummary implements OnInit {
       }
 
       if (this.pickup() && this.drop()) {
+        this.loaderService.show('Loading ride summary');
         const route = await this.geoapifyService.getRouteDistance(
           this.pickup() as GeoPlace,
           this.drop() as GeoPlace,
@@ -53,6 +62,10 @@ export class RideSummary implements OnInit {
 
         this.rideSummary.set(route);
       }
-    });
+    } catch (err) {
+      console.log('🚀 ~ RideSummary ~ getRideSummary ~ err:', err);
+    } finally {
+      this.loaderService.hide();
+    }
   }
 }
