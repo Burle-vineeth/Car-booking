@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+body {
+  background-color: var(--bg-surface);
+}
+
 :root {
   /* ---------- Typography ---------- */
   --font-sans:
@@ -8,45 +12,34 @@
 
   /* ---------- Backgrounds ---------- */
   --bg: #f4f6f9;
-  /* App background */
   --bg-surface: #ffffff;
-  /* Cards, header */
   --bg-elevated: #eef1f6;
-  /* Modals, dropdowns */
 
   /* ---------- Text ---------- */
   --text-primary: #0f172a;
-  /* Headings */
   --text-secondary: #1e293b;
-  /* Body */
   --text-muted: #64748b;
-  /* Meta text */
+  --text-hover: #f4f6f9;
 
   /* ---------- Borders ---------- */
   --border: #e2e8f0;
 
   /* ---------- Brand (Primary CTA) ---------- */
   --primary: #0f2a44;
-  /* Automotive navy */
   --primary-hover: #0b1f33;
   --primary-active: #081726;
   --primary-soft: #e6edf5;
 
   /* ---------- Accent (Speed / Action) ---------- */
   --accent: #06b6d4;
-  /* Electric cyan */
   --accent-hover: #0891b2;
   --accent-soft: #cffafe;
 
   /* ---------- Status ---------- */
   --success: #16a34a;
-  /* Booking confirmed */
   --warning: #f59e0b;
-  /* Surge / caution */
   --error: #dc2626;
-  /* Errors */
   --info: #0284c7;
-  /* Info / tips */
 
   /* ---------- UI ---------- */
   --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.08);
@@ -57,30 +50,26 @@
 [data-theme='dark'] {
   /* ---------- Backgrounds ---------- */
   --bg: #0b0f14;
-  /* Asphalt black */
   --bg-surface: #111827;
-  /* Cards */
   --bg-elevated: #0f172a;
-  /* Modals */
 
   /* ---------- Text ---------- */
   --text-primary: #f8fafc;
   --text-secondary: #cbd5e1;
   --text-muted: #94a3b8;
+  --text-hover: #f8fafc;
 
   /* ---------- Borders ---------- */
   --border: #1f2937;
 
   /* ---------- Brand ---------- */
   --primary: #3b82f6;
-  /* Neon blue */
   --primary-hover: #2563eb;
   --primary-active: #1d4ed8;
   --primary-soft: #1e293b;
 
   /* ---------- Accent ---------- */
   --accent: #22d3ee;
-  /* Electric cyan glow */
   --accent-hover: #06b6d4;
   --accent-soft: #083344;
 

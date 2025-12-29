@@ -18,5 +18,10 @@
   },
 
   // Debug Prettier
-  "prettier.enableDebugLogs": true
+  "prettier.enableDebugLogs": true,
+  "cSpell.words": ["geoapify"],
+
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  }
 }

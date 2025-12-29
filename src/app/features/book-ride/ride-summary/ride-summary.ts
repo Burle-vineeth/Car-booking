@@ -1,0 +1,81 @@
+import { GeoapifyService } from '@/core/services/geoapify.service';
+import { LoaderService } from '@/core/services/loader.service';
+import { GeoPlace, Route } from '@/core/types';
+import { Button } from '@/shared/components/button/button';
+import { Login } from '@/shared/components/login/login';
+import { Divider } from '@/shared/directives/divider';
+import { CurrencyPipe } from '@angular/common';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faLocationDot, faMapPin } from '@fortawesome/free-solid-svg-icons';
+
+@Component({
+  selector: 'app-ride-summary',
+  imports: [FontAwesomeModule, Divider, CurrencyPipe, Button, Login],
+  templateUrl: './ride-summary.html',
+  styleUrl: './ride-summary.css',
+})
+export class RideSummary implements OnInit {
+  public pickup = signal<GeoPlace | null>(null);
+  public drop = signal<GeoPlace | null>(null);
+  public rideSummary = signal<Route | null>(null);
+  public showLogin = signal<boolean>(false);
+  public readonly faLocationDot = faLocationDot;
+  public readonly faMapPin = faMapPin;
+
+  public pickupAddress = computed(() => this.pickup()?.formatted ?? '—');
+  public dropAddress = computed(() => this.drop()?.formatted ?? '—');
+  public distanceKm = computed(() => this.rideSummary()?.summary?.distance_km ?? null);
+  public durationMin = computed(() => this.rideSummary()?.summary?.duration_min ?? null);
+  public fareAmount = computed(() => {
+    const km = this.distanceKm() ?? 0;
+    const base = 2.5; // base fare
+    const perKm = 1.25; // per km rate
+    return km ? (base + km * perKm).toFixed(2) : 0;
+  });
+
+  private route = inject(ActivatedRoute);
+  private geoapifyService = inject(GeoapifyService);
+  private loaderService = inject(LoaderService);
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.getRideSummary(params);
+    });
+  }
+
+  public confirmRide() {
+    this.showLogin.set(true);
+  }
+
+  public closeLogin() {
+    this.showLogin.set(false);
+  }
+
+  private async getRideSummary(params: Params) {
+    try {
+      if (params['pickup']) {
+        this.pickup.set(JSON.parse(params['pickup']));
+      }
+
+      if (params['drop']) {
+        this.drop.set(JSON.parse(params['drop']));
+      }
+
+      if (this.pickup() && this.drop()) {
+        this.loaderService.show('Loading ride summary');
+        const route = await this.geoapifyService.getRouteDistance(
+          this.pickup() as GeoPlace,
+          this.drop() as GeoPlace,
+        );
+
+        this.rideSummary.set(route);
+      }
+    } catch (err) {
+      console.log('🚀 ~ RideSummary ~ getRideSummary ~ err:', err);
+    } finally {
+      this.loaderService.hide();
+    }
+  }
+}

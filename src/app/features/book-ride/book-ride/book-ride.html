@@ -1,0 +1,58 @@
+<section
+  class="absolute left-0 right-0 top-0 min-h-screen flex items-center justify-center bg-cover bg-center"
+  [ngStyle]="{
+    'background-image':
+      'linear-gradient(rgba(15,23,42,0.55), rgba(15,23,42,0.55)), url(https://media.wired.com/photos/59269cd37034dc5f91bec0f1/3:2/w_2240,c_limit/GoogleMapTA.jpg)',
+  }"
+>
+  <div
+    class="w-full max-w-md bg-(--bg-surface) rounded-(--radius) p-6 shadow-(--shadow) mx-4 sm:mx-0"
+  >
+    <h2 class="text-2xl font-bold text-(--text-primary) mb-1">Book Your Ride</h2>
+    <p class="text-sm text-(--text-muted) mb-6">Fast • Safe • Reliable</p>
+
+    <div class="mb-4">
+      <label class="block text-sm font-semibold text-(--text-secondary) mb-1"
+        >Pickup Location</label
+      >
+      <app-auto-complete-input
+        [placeholder]="'Enter pickup location'"
+        [icon]="'📍'"
+        [minLength]="2"
+        (valueChange)="pickup.set($event)"
+        (select)="onPickupSelect($event)"
+      ></app-auto-complete-input>
+
+      @if (pickupError()) {
+        <p class="mt-1 text-sm text-(--error)">
+          {{ pickupError() }}
+        </p>
+      }
+    </div>
+
+    <div class="mb-6">
+      <label class="block text-sm font-semibold text-(--text-secondary) mb-1">Drop Location</label>
+      <app-auto-complete-input
+        [placeholder]="'Enter drop location'"
+        [icon]="'🏁'"
+        [minLength]="2"
+        (valueChange)="drop.set($event)"
+        (select)="onDropSelect($event)"
+      ></app-auto-complete-input>
+
+      @if (dropError()) {
+        <p class="mt-1 text-sm text-(--error)">
+          {{ dropError() }}
+        </p>
+      }
+    </div>
+
+    <button
+      type="button"
+      class="w-full py-3 rounded-lg bg-(--primary) text-white font-semibold text-base hover:bg-(--primary-hover) active:bg-(--primary-active) transition-all cursor-pointer"
+      (click)="bookRide()"
+    >
+      🚗 Book Ride
+    </button>
+  </div>
+</section>
