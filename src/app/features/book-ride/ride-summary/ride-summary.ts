@@ -2,6 +2,7 @@ import { GeoapifyService } from '@/core/services/geoapify.service';
 import { LoaderService } from '@/core/services/loader.service';
 import { GeoPlace, Route } from '@/core/types';
 import { Button } from '@/shared/components/button/button';
+import { Login } from '@/shared/components/login/login';
 import { Divider } from '@/shared/directives/divider';
 import { CurrencyPipe } from '@angular/common';
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
@@ -11,7 +12,7 @@ import { faLocationDot, faMapPin } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-ride-summary',
-  imports: [FontAwesomeModule, Divider, CurrencyPipe, Button],
+  imports: [FontAwesomeModule, Divider, CurrencyPipe, Button, Login],
   templateUrl: './ride-summary.html',
   styleUrl: './ride-summary.css',
 })
@@ -19,6 +20,7 @@ export class RideSummary implements OnInit {
   public pickup = signal<GeoPlace | null>(null);
   public drop = signal<GeoPlace | null>(null);
   public rideSummary = signal<Route | null>(null);
+  public showLogin = signal<boolean>(false);
   public readonly faLocationDot = faLocationDot;
   public readonly faMapPin = faMapPin;
 
@@ -41,6 +43,14 @@ export class RideSummary implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.getRideSummary(params);
     });
+  }
+
+  public confirmRide() {
+    this.showLogin.set(true);
+  }
+
+  public closeLogin() {
+    this.showLogin.set(false);
   }
 
   private async getRideSummary(params: Params) {

@@ -157,5 +157,11 @@
 
     <div appDivider></div>
   </section>
-  <app-button class="fixed bottom-0 left-0 right-0" [fullWidth]="true">Confirm Ride</app-button>
+  <app-button class="fixed bottom-0 left-0 right-0" [fullWidth]="true" (handleClick)="confirmRide()"
+    >Confirm Ride</app-button
+  >
 </section>
+
+@if (showLogin()) {
+  <app-login (close)="closeLogin()" />
+}

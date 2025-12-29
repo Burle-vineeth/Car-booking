@@ -1,5 +1,10 @@
 <div class="flex justify-center mt-8 mb-4">
-  <button [attr.type]="type()" [disabled]="disabled() || loading()" [class]="classes">
+  <button
+    [attr.type]="type()"
+    [disabled]="disabled() || loading()"
+    [class]="classes"
+    (click)="buttonClick()"
+  >
     @if (loading()) {
       <svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />

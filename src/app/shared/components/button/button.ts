@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
 type ButtonSize = 'sm' | 'md' | 'lg';
@@ -17,6 +17,7 @@ export class Button {
   public loading = input<boolean>(false);
   public fullWidth = input<boolean>(false);
   public type = input<ButtonType>('button');
+  public handleClick = output();
 
   get classes(): string {
     return [
@@ -27,6 +28,10 @@ export class Button {
       this.fullWidth() ? 'w-[90%] md:w-[80%]' : '',
       this.disabled() || this.loading() ? 'opacity-60 cursor-no-drop' : 'cursor-pointer',
     ].join(' ');
+  }
+
+  public buttonClick() {
+    this.handleClick.emit();
   }
 
   private get sizeClass() {
