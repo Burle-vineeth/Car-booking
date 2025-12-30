@@ -1,9 +1,10 @@
+import { MobileFormat } from '@/shared/directives/mobile-format';
 import { Component, output } from '@angular/core';
 import { Button } from '../button/button';
 
 @Component({
   selector: 'app-login',
-  imports: [Button],
+  imports: [Button, MobileFormat],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
