@@ -1,54 +1,73 @@
-<div
-  class="fixed inset-0 z-40 bg-[color-mix(in_srgb,var(--text-primary)_40%,transparent)]"
-  (click)="onBack()"
-></div>
+<form [formGroup]="form">
+  <div
+    class="fixed inset-0 z-40 bg-[color-mix(in_srgb,var(--text-primary)_40%,transparent)]"
+    (click)="onBack()"
+  ></div>
 
-<div
-  class="fixed bottom-0 left-0 right-0 z-50 h-[70%] rounded-t-(--radius) bg-(--bg-surface) shadow-(--shadow) animate-slide-up flex flex-col"
->
-  <div class="flex items-center gap-3 px-4 py-3 border-b border-(--border)">
-    <button
-      class="text-2xl leading-none text-(--text-primary) cursor-pointer border rounded-full border-(--text-hover)"
-      (click)="onBack()"
-    >
-      ←
-    </button>
+  <div
+    class="fixed bottom-0 left-0 right-0 z-50 h-[70%] rounded-t-(--radius) bg-(--bg-surface) shadow-(--shadow) animate-slide-up flex flex-col"
+  >
+    <div class="flex items-center gap-3 px-4 py-3 border-b border-(--border)">
+      <button
+        class="text-2xl leading-none text-(--text-primary) cursor-pointer border rounded-full border-(--text-hover)"
+        (click)="onBack()"
+      >
+        ←
+      </button>
 
-    <span class="text-lg font-semibold text-(--text-primary)"> Login </span>
-  </div>
+      <span class="text-lg font-semibold text-(--text-primary)"> Login </span>
+    </div>
 
-  <div class="flex-1 py-6">
-    <div class="px-5">
-      <h2 class="text-2xl font-bold text-(--text-primary)">Welcome To Car Booking</h2>
-      <p class="mt-1 text-(--text-muted)">Enter your mobile number</p>
+    <div class="flex-1 py-6">
+      <div class="px-5">
+        <h2 class="text-2xl font-bold text-(--text-primary)">Welcome To Car Booking</h2>
+        <p class="mt-1 text-(--text-muted)">Enter your mobile number</p>
 
-      <div class="mt-6">
-        <div
-          class="flex items-center gap-3 rounded-lg border border-(--border) bg-(--bg) px-4 py-3 focus-within:ring-2 focus-within:ring-(--primary)"
-        >
-          <!-- Country Prefix -->
-          <div class="flex items-center gap-2 text-(--text-primary)">
-            <span class="text-lg">🇮🇳</span>
-            <span class="text-sm font-medium">+91</span>
+        <div class="mt-6">
+          <div
+            class="flex items-center gap-3 rounded-lg border border-(--border) bg-(--bg) px-4 py-3 focus-within:ring-2 focus-within:ring-(--primary)"
+          >
+            <!-- Country Prefix -->
+            <div class="flex items-center gap-2 text-(--text-primary)">
+              <span class="text-lg">🇮🇳</span>
+              <span class="text-sm font-medium">+91</span>
+            </div>
+
+            <!-- Divider -->
+            <div class="h-6 w-px bg-(--border)"></div>
+
+            <!-- Mobile Input -->
+            <input
+              type="text"
+              inputmode="numeric"
+              placeholder="Enter mobile number"
+              maxlength="11"
+              formControlName="mobile"
+              appMobileFormat
+              class="w-full bg-transparent text-base text-(--text-primary) placeholder:text-(--text-muted) focus:outline-none"
+            />
           </div>
-
-          <!-- Divider -->
-          <div class="h-6 w-px bg-(--border)"></div>
-
-          <!-- Mobile Input -->
-          <input
-            type="text"
-            inputmode="numeric"
-            placeholder="Enter mobile number"
-            maxlength="11"
-            appMobileFormat
-            class="w-full bg-transparent text-base text-(--text-primary) placeholder:text-(--text-muted) focus:outline-none"
-          />
         </div>
+
+        @if (form.controls.mobile.touched && form.controls.mobile.invalid) {
+          <p class="mt-1 text-sm text-(--error)">
+            @if (form.controls.mobile.errors?.['required']) {
+              <span> Mobile number is required </span>
+            }
+
+            @if (form.controls.mobile.errors?.['invalidMobile']) {
+              <span> Enter a valid 10-digit mobile number </span>
+            }
+          </p>
+        }
       </div>
     </div>
+    <app-button
+      [disabled]="form.invalid"
+      class="fixed bottom-4 left-0 right-0"
+      [fullWidth]="true"
+      (handleClick)="getOTP()"
+      >Get OTP</app-button
+    >
   </div>
-  <app-button class="fixed bottom-4 left-0 right-0" [fullWidth]="true" (handleClick)="getOTP()"
-    >Get OTP</app-button
-  >
-</div>
+</form>
